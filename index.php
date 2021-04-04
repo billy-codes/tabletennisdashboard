@@ -65,7 +65,12 @@
 
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-              
+              <?php 
+                if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+                  $current_user = $_SESSION["username"];
+              ?>
+              <h1>Logged in</h1>
+              <?php }?>
           </ul>
 
         </div>
