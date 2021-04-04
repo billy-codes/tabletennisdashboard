@@ -134,8 +134,8 @@
 
     <!--Copyright-->
     <div class="footer-copyright py-3">
-      © 2020 Copyright:
-      <a href="index.php" target="_blank"> Belal Khaled - UCSI University </a>
+      © 2021 Copyright:
+      <a href="index.php" target="_blank"> Belal Khaled  </a>
     </div>
     <!--/.Copyright-->
 
