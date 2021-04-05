@@ -74,7 +74,22 @@ session_start();
                 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
                   $current_user = $_SESSION["username"];
               ?>
-              <h1>Logged in</h1>
+              <li class="nav-item">
+                <a href="panel.php" class="nav-link border border-light rounded waves-effect" target="_blank">
+                  <i class="fas fa-user mr-2"></i>Welcome <?php echo $_SESSION["name"];?>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logout.php" class="nav-link">
+                  Logout
+                </a>
+              </li>
+              <?php }else {?>
+              <li class="nav-item">
+                <a href="login.php" class="nav-link border border-light rounded waves-effect" target="_blank">
+                  <i class="fas fa-user mr-2"></i>Login
+                </a>
+              </li>
               <?php }?>
           </ul>
 
