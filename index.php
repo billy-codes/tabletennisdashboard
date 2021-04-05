@@ -158,7 +158,25 @@ session_start();
                             <th scope="col">Information</th>
                             </tr>
                         </thead>
-                        
+                        <tbody>
+                            <?php
+                                $query = "SELECT * FROM players WHERE gender = 'Female' ORDER BY wins DESC LIMIT 0,10";
+                                if($result = mysqli_query($link, $query)){
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo "<tr>";
+                                            echo "<td>".$row['id']."</td>";
+                                            echo "<td>".$row['name']."</td>";
+                                            echo "<td><img src='img/flags/".$row['country'].".png'/> ".$row['country']."</td>";
+                                            echo "<td>".$row['wins']."</td>";
+                                            echo '<td><a href="profile.php?id='.$row['id'].'" target="__blank"><i class="fas fa-search"></i></a></td>';
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                          
+                            ?>
+                        </tbody>
                     </table>
                     <!-- PLAYERS LIST -->
                 </div>
