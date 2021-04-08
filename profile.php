@@ -1,4 +1,15 @@
 
+<?php
+require_once 'core/init.php';
+session_start();
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $id = intval($id);
+}else{
+    header("location: index.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
