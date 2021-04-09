@@ -133,7 +133,56 @@ $query = "SELECT * FROM players WHERE id='$id'";
     <div class="container">
       <!--Section: Cards-->
         <section class="text-center">
-           
+           <!--Grid row-->
+            <div class="row mb-4 wow fadeIn d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="col-sm-6">
+                    <!-- Card Regular -->
+                    <div class="card testimonial-card">
+                        <!-- Background color -->
+                    <div class="card-up black lighten-1"></div>
+                        <!-- Card image -->
+                        <div class="avatar mx-auto white">
+                        <img class="rounded-circle" src="img/country/<?php echo $country;?>.png" alt="Card image cap">
+                        </div>
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade text-center">
+
+                        <!-- Title -->
+                        <h4 class="card-title"><strong><?php echo $fullName;?></strong></h4>
+                        <!-- Subtitle -->
+                        <h6 class="font-weight-bold black-text py-2"><?php echo $gender;?> | <?php echo $country;?></h6>
+                        
+                        <!-- Text -->
+                        <p class="card-text">
+                            <table class="table table-sm">
+                                <tbody class="text-left">
+                                    <tr>
+                                    <th scope="row">Age: <?php echo $age;?></th>
+                                    <td><i class="fas fa-clipboard-list"></i> Matches: <?php echo $matches;?></td>
+                                    
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">Birthyear: <?php echo $birthYear;?></th>
+                                    <td><i class="fas fa-arrow-up green-text"></i> Wins: <?php echo $wins;?> (<?php if($wins != 0){echo round(($wins/$matches)*100);}?>%)</td>
+                                    
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">Status: <?php if($active === "Active"){echo "<span class='text-success font-weight-bold'>".$active."</span>";}else{echo "<span class='font-weight-bold text-danger'>".$active."</span>";}?></th>
+                                    <td colspan="2"><i class="fas fa-arrow-down red-text"></i> Losses: <?php echo $losses;?> (<?php if($losses != 0){echo round(($losses/$matches)*100);}?>%)</td>
+                                    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p>
+                        </div>
+                    </div>
+                    <!-- Card Regular -->
+                </div>
+                <!--Grid column-->
+            </div>
+            <hr>
+            <!--Grid row-->
         </section>
       <!--Section: Cards-->
     </div>
