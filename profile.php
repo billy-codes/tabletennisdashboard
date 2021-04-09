@@ -9,6 +9,25 @@ if(isset($_GET['id'])){
     header("location: index.php");
 }
 
+$query = "SELECT * FROM players WHERE id='$id'";
+    if($result = mysqli_query($link, $query)){
+        if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result)){
+                $fullName = $row['name'];
+                $country = $row['country'];
+                $gender = $row['gender'];
+                $birthYear = $row['birthyear'];
+                $active = $row['active'];
+                $age = $row['age'];
+                $matches = $row['matches'];
+                $wins = $row['wins'];
+                $losses = $row['losses'];
+            }
+        }else{
+            header("location: index.php");
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
