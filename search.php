@@ -108,7 +108,43 @@
                 <!--Grid column-->
                 <div class="col">
                     <!-- SEARCH RESULTS -->
-                    
+                    <?php if(isset($_GET['playername'])){?>
+                    <table class="table table-hover table-sm">
+                        <caption>Search Results</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            
+                                $querySearch = "SELECT * FROM players WHERE name LIKE '%$playerSearch%'";
+                                if($resultSearch = mysqli_query($link, $querySearch)){
+                                    if(mysqli_num_rows($resultSearch) > 0){
+                                        while($row = mysqli_fetch_array($resultSearch)){
+                                            echo "<tr>";
+                                            echo "<td>".$row['id']."</td>";
+                                            echo "<td>".$row['name']."</td>";
+                                            echo "<td><img src='img/flags/".$row['country'].".png'/> ".$row['country']."</td>";
+                                            echo "<td>".$row['gender']."</td>";
+                                            echo '<td><a href="profile.php?id='.$row['id'].'" target="__blank"><i class="fas fa-search"></i></a></td>';
+                                            echo "</tr>";
+                                        }
+                                    }else{
+                                        header("location: index.php");
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php 
+                        }
+                    ?>  
                     <!-- SEARCH RESULTS -->
                 </div>
                 <!--Grid column-->
