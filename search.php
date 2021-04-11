@@ -1,3 +1,15 @@
+<?php
+require_once 'core/init.php';
+session_start();
+if(isset($_GET['playername']) AND !empty($_GET['playername'])){
+    $playerName = $_GET['playername'];
+    list($firstname, $lastname) = explode(' ', $playerName);
+    $playerSearch = trim($firstname).' '.trim($lastname);
+    
+}else{
+    header("location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
