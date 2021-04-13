@@ -127,9 +127,17 @@ session_start();
                         </thead>
                         <tbody>
                             <?php
-                                
+                                if (isset($_GET['pageno'])) {
+                                    $pageno = $_GET['pageno'];
+                                } else {
+                                    $pageno = 1;
+                                }
+                                $no_of_records_per_page = 10;
                                 $offset = ($pageno-1) * $no_of_records_per_page;
-                                
+                                $total_pages_sql = "SELECT COUNT(*) FROM players";
+                                $resultPage = mysqli_query($link,$total_pages_sql);
+                                $total_rows = mysqli_fetch_array($resultPage)[0];
+                                $total_pages = ceil($total_rows / $no_of_records_per_page);
                                 $query = "SELECT * FROM players LIMIT $offset,$no_of_records_per_page";
                                 if($result = mysqli_query($link, $query)){
                                     if(mysqli_num_rows($result) > 0){
@@ -147,6 +155,27 @@ session_start();
                           
                             ?>
 
+                            <!-- PAGINATION -->
+                            <tr>
+                                <ul class="pagination pg-blue justify-content-end">
+                                    <li class="page-item">
+                                        <a href="?pageno=1" class="page-link"><i class="fas fa-angle-double-left"></i></a>
+                                    </li>
+                                    <li class="<?php if($pageno <= 1){ echo ''; } ?> page-item">
+                                        <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>" class="page-link">
+                                            <i class="fas fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="<?php if($pageno >= $total_pages){ echo ''; } ?> page-item">
+                                        <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" class="page-link">
+                                            <i class="fas fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a href="?pageno=<?php echo $total_pages; ?>" class="page-link"><i class="fas fa-angle-double-right"></i></a>
+                                    </li>
+                                </ul>
+                            </tr>
+                            <!-- PAGINATION -->
 
                         </tbody>
                     </table>
