@@ -125,7 +125,30 @@ session_start();
                             <th scope="col">Information</th>
                             </tr>
                         </thead>
-                        
+                        <tbody>
+                            <?php
+                                
+                                $offset = ($pageno-1) * $no_of_records_per_page;
+                                
+                                $query = "SELECT * FROM players LIMIT $offset,$no_of_records_per_page";
+                                if($result = mysqli_query($link, $query)){
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo "<tr>";
+                                            echo "<td>".$row['id']."</td>";
+                                            echo "<td>".$row['name']."</td>";
+                                            echo "<td><img src='img/flags/".$row['country'].".png'/> ".$row['country']."</td>";
+                                            echo "<td>".$row['gender']."</td>";
+                                            echo '<td><a href="profile.php?id='.$row['id'].'" target="__blank"><i class="fas fa-search"></i></a></td>';
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                          
+                            ?>
+
+
+                        </tbody>
                     </table>
                     <!-- PLAYERS LIST -->
                 </div>
