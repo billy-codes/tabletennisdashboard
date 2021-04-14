@@ -107,12 +107,64 @@ session_start();
     <div class="container">
       <!--Section: Cards-->
         <section class="text-center">
-            
+            <!--Grid row-->
+            <div class="row mb-4 wow fadeIn">
+                <!--Grid column-->
+                <div class="col">
+                    <!-- Search form -->
+                    <form class="form-inline d-flex justify-content-center md-form form-sm mt-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input class="form-control form-control-sm ml-3 w-75" name="playerName" type="text" placeholder="Player Name"
+                        aria-label="Search">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-elegant btn-rounded btn-sm my-0 waves-effect waves-light" value="Search">
+                        </div>
+                    </form>
+                </div>
+                <!--Grid column-->         
+
+            </div>
+            <!--Grid row-->
 
             <!--Grid row-->
             <div class="row mb-4 wow fadeIn">
                 <!--Grid column-->
                 <div class="col">
+                    <!-- SEARCH RESULTS -->
+                    <?php if(isset($_POST['playerName'])){?>
+                    <table class="table table-hover table-sm">
+                        <caption>Search Results</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $playerSearch = $_POST['playerName'];
+                                $querySearch = "SELECT * FROM players WHERE name LIKE '%$playerSearch%'";
+                                if($resultSearch = mysqli_query($link, $querySearch)){
+                                    if(mysqli_num_rows($resultSearch) > 0){
+                                        while($row = mysqli_fetch_array($resultSearch)){
+                                            echo "<tr>";
+                                            echo "<td>".$row['id']."</td>";
+                                            echo "<td>".$row['name']."</td>";
+                                            echo "<td><img src='img/flags/".$row['country'].".png'/> ".$row['country']."</td>";
+                                            echo "<td>".$row['gender']."</td>";
+                                            echo '<td><a href="profile.php?id='.$row['id'].'" target="__blank"><i class="fas fa-search"></i></a></td>';
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php }?>  
+                    <!-- SEARCH RESULTS -->
 
                     <!-- PLAYERS LIST -->
                     <table class="table table-hover table-sm">
