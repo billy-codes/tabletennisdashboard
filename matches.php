@@ -113,7 +113,56 @@ session_start();
                 <!--Grid column-->
                 <div class="col">
                     <!-- SEARCH RESULTS -->
-                    
+                    <?php
+                        if(isset($_GET['tournamentID']) AND !empty($_GET['tournamentID'])){
+                            $tournamentID = $_GET['tournamentID'];
+                            $tournamentID = intval($tournamentID);
+                        
+                    ?>
+                    <table class="table table-hover table-sm">
+                        <caption>Search Results</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Tournament</th>
+                                <th scope="col">Player A</th>
+                                <th scope="col">Player B</th>
+                                <th scope="col">Rounds</th>
+                                <th scope="col">Results A</th>
+                                <th scope="col">Results B</th>
+                                <th scope="col">Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                if(isset($_GET['tournamentID']) AND !empty($_GET['tournamentID'])){
+                                    $tournamentID = $_GET['tournamentID'];
+                                    $tournamentID = intval($tournamentID);
+                                }else{
+                                    header("location: index.php");
+                                }
+                                $querySearch = "SELECT * FROM matches WHERE tournamentID = '$tournamentID'";
+                                if($resultSearch = mysqli_query($link, $querySearch)){
+                                    if(mysqli_num_rows($resultSearch) > 0){
+                                        while($row = mysqli_fetch_array($resultSearch)){
+                                            $roundA = intval($row['resultA']);
+                                            $roundB = intval($row['resultB']);
+                                            $totalRounds = $roundA + $roundB;
+                                            echo "<tr>";
+                                            echo "<td class='w-25'>".$row['tournamentName']."</td>";
+                                            echo '<td><u><a href="search.php?playername='.$row['teamA'].'" target="__blank">'.$row['teamA'].'</a></u></td>';
+                                            echo '<td><u><a href="search.php?playername='.$row['teamB'].'" target="__blank">'.$row['teamB'].'</a></u></td>';
+                                            echo "<td>".$totalRounds."</td>";
+                                            echo "<td>".$row['resultA']."</td>";
+                                            echo "<td>".$row['resultB']."</td>";
+                                            echo "<td>".$row['winner']."</td>";
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                    </table> 
+                    <?php }?>
                     <!-- SEARCH RESULTS -->
 
                     <!-- MATCHES LIST -->
