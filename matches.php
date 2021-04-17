@@ -178,7 +178,44 @@ session_start();
                                 <th scope="col">Winner</th>
                             </tr>
                         </thead>
-                        
+                        <tbody>
+                            <?php
+                                if (isset($_GET['pageno'])) {
+                                    $pageno = $_GET['pageno'];
+                                } else {
+                                    $pageno = 1;
+                                }
+                                $no_of_records_per_page = 10;
+                                $offset = ($pageno-1) * $no_of_records_per_page;
+                                $total_pages_sql = "SELECT COUNT(*) FROM matches";
+                                $resultPage = mysqli_query($link,$total_pages_sql);
+                                $total_rows = mysqli_fetch_array($resultPage)[0];
+                                $total_pages = ceil($total_rows / $no_of_records_per_page);
+                                $query = "SELECT * FROM matches LIMIT $offset,$no_of_records_per_page";
+                                if($result = mysqli_query($link, $query)){
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_array($result)){
+                                            $roundA = intval($row['resultA']);
+                                            $roundB = intval($row['resultB']);
+                                            $totalRounds = $roundA + $roundB;
+                                            echo "<tr>";
+                                            echo "<td class='w-25'>".$row['tournamentName']."</td>";
+                                            echo '<td><u><a href="search.php?playername='.$row['teamA'].'" target="__blank">'.$row['teamA'].'</a></u></td>';
+                                            echo '<td><u><a href="search.php?playername='.$row['teamB'].'" target="__blank">'.$row['teamB'].'</a></u></td>';
+                                            echo "<td>".$totalRounds."</td>";
+                                            echo "<td>".$row['resultA']."</td>";
+                                            echo "<td>".$row['resultB']."</td>";
+                                            echo "<td>".$row['winner']."</td>";
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                          
+                            ?>
+
+                            
+
+                        </tbody>
                     </table>
                     <!-- MATCHES LIST -->
                 </div>
