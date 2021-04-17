@@ -213,7 +213,27 @@ session_start();
                           
                             ?>
 
-                            
+                            <!-- PAGINATION -->
+                            <tr>
+                                <ul class="pagination pg-blue justify-content-end">
+                                    <li class="page-item">
+                                        <a href="?pageno=1" class="page-link"><i class="fas fa-angle-double-left"></i></a>
+                                    </li>
+                                    <li class="<?php if($pageno <= 1){ echo ''; } ?> page-item">
+                                        <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>" class="page-link">
+                                            <i class="fas fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="<?php if($pageno >= $total_pages){ echo ''; } ?> page-item">
+                                        <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" class="page-link">
+                                            <i class="fas fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a href="?pageno=<?php echo $total_pages; ?>" class="page-link"><i class="fas fa-angle-double-right"></i></a>
+                                    </li>
+                                </ul>
+                            </tr>
+                            <!-- PAGINATION -->
 
                         </tbody>
                     </table>
