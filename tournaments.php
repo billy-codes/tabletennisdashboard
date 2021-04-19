@@ -1,3 +1,8 @@
+<?php
+require_once 'core/init.php';
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,7 +114,43 @@
                 <div class="col">
 
                     <!-- PLAYERS LIST -->
-                    
+                    <table class="table table-hover table-sm">
+                        <thead class="black white-text">
+                            <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Tournament</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Month</th>
+                            <th scope="col">Matches</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+
+                            <!-- PAGINATION -->
+                            <tr>
+                                <ul class="pagination pg-blue justify-content-end">
+                                    <li class="page-item">
+                                        <a href="?pageno=1" class="page-link"><i class="fas fa-angle-double-left"></i></a>
+                                    </li>
+                                    <li class="<?php if($pageno <= 1){ echo ''; } ?> page-item">
+                                        <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>" class="page-link">
+                                            <i class="fas fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="<?php if($pageno >= $total_pages){ echo ''; } ?> page-item">
+                                        <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" class="page-link">
+                                            <i class="fas fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a href="?pageno=<?php echo $total_pages; ?>" class="page-link"><i class="fas fa-angle-double-right"></i></a>
+                                    </li>
+                                </ul>
+                            </tr>
+                            <!-- PAGINATION -->
+
+                        </tbody>
+                    </table>
                     <!-- PLAYERS LIST -->
                 </div>
                 <!--Grid column-->
