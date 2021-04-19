@@ -125,7 +125,39 @@ session_start();
                         </tr>
                         </thead>
                         <tbody>
-                            
+                            <?php
+                                if (isset($_GET['pageno'])) {
+                                    $pageno = $_GET['pageno'];
+                                } else {
+                                    $pageno = 1;
+                                }
+                                $no_of_records_per_page = 10;
+                                $offset = ($pageno-1) * $no_of_records_per_page;
+                                $total_pages_sql = "SELECT COUNT(*) FROM matches";
+                                $resultPage = mysqli_query($link,$total_pages_sql);
+                                $total_rows = mysqli_fetch_array($resultPage)[0];
+                                $total_pages = ceil($total_rows / $no_of_records_per_page);
+                                $query = "SELECT * FROM tournaments LIMIT $offset,$no_of_records_per_page";
+                                if($result = mysqli_query($link, $query)){
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_array($result)){
+                                            $tournamentID = $row['id'];
+                                            $query_2 = "SELECT COUNT(*) FROM matches WHERE tournamentID = '$tournamentID'";
+                                            if($result_2 = mysqli_query($link, $query_2)){
+                                                $num_rows = mysqli_num_rows($result_2);
+                                                }
+                                            echo "<tr>";
+                                            echo '<td><u><a href="matches.php?tournamentID='.$row['id'].'" target="__blank">'.$row['id'].'</a></u></td>';
+                                            echo "<td class='w-25'>".$row['name']."</td>";
+                                            echo "<td>".$row['year']."</td>";
+                                            echo "<td>".$row['month']."</td>";
+                                            echo "<td>".$num_rows."</td>";
+                                            echo "</tr>";
+                                        }
+                                    }
+                                
+                                }
+                            ?>
 
                             <!-- PAGINATION -->
                             <tr>
