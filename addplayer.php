@@ -1,6 +1,26 @@
 <?php
 require_once 'core/init.php';
 session_start();
+$message = "";
+if($_SERVER["REQUEST_METHOD"] == "POST"){    
+    $playerName = $_POST['playerName'];
+    $playerCountry = $_POST['playerCountry'];
+    $gender = $_POST['gender'];
+    $birthYear = intval($_POST['birthYear']);
+    $active = $_POST['active'];
+    $age = intval($_POST['age']);
+    $matches = intval($_POST['matches']);
+    $wins = intval($_POST['wins']);
+    $losses = intval($_POST['losses']);
+
+    $query = "INSERT INTO players (name, country, gender, birthyear, active, age, matches, wins, losses) VALUES ('$playerName', '$playerCountry', '$gender','$birthYear','$active','$age','$matches','$wins','$losses')";
+    if(mysqli_query($link, $query)){
+        $message = "Player Added Successfully!";
+    } else{
+        echo "ERROR: Could not able to execute $query. " . mysqli_error($link);
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
