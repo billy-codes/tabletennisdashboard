@@ -130,7 +130,84 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <!--Grid row-->
             <div class="row mb-4 wow fadeIn">
                 <!--Grid column-->
-                                <!--Grid column-->
+                <div class="col">
+                <!-- Add Form -->
+                <?php
+                    if(!empty($message)){
+                        echo '<div class="alert alert-primary" role="alert">'.$message.'</div>';
+                    }
+                ?>
+                        <!--Header-->
+                        <div class="header pt-2 black">
+                                <div class="row mx-sm-5 justify-content-center">
+                                <h3 class="white-text mb-3 pt-3 font-weight-bold">
+                                    <i class="fas fa-user"></i>
+                                    Add Player
+                                </h3>
+                                </div>
+                            </div>
+                            <!--Header-->
+                        <form class="text-center border border-light p-5" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <hr class="my-2">
+                            <div class="form-group">
+                            <!-- Username -->
+                            <input type="text" name="playerName" class="form-control mb-4" placeholder="Player Name" required>
+                            <span class="help-block"></span>
+                            </div>
+                            <!-- Password -->
+                            <div class="form-group">
+                            <input type="text" name="playerCountry" class="form-control mb-4" placeholder="Player Country" required>
+                            <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="browser-default custom-select" name="gender" required>
+                                    <label>Gender</label>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="birthYear" class="form-control mb-4" placeholder="Birthyear" required>
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="browser-default custom-select" name="active">
+                                    <label>Activity</label>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="age" class="form-control mb-4" placeholder="Age" required>
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="matches" class="form-control mb-4" placeholder="Matches" required>
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="wins" class="form-control mb-4" placeholder="Wins" required>
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="losses" class="form-control mb-4" placeholder="Losses" required>
+                                <span class="help-block"></span>
+                            </div>
+                            <!-- Sign in button -->
+                            <div class="form-group">
+                            <input type="submit" class="btn btn-info" value="Add Player">
+                            </div>
+                        </form>
+                    
+                </div>
+                <!--Grid column-->
             </div>
             <hr>
             <!--Grid row-->
